@@ -10,7 +10,7 @@ C:\WINDOWS\system32>net start mysql80
 C:\WINDOWS\system32>mysql -u root -p
 Enter password: ******
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 57
+Your MySQL connection id is 56
 Server version: 8.0.12 MySQL Community Server - GPL
 
 Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
@@ -36,142 +36,65 @@ mysql> show databases;
 | taobao2            |
 | zhabgwenjing1      |
 +--------------------+
-10 rows in set (0.00 sec)
+10 rows in set (0.04 sec)
 
 mysql> use taobao;
 Database changed
-mysql> create table shoucangbiaodan(id int
-    -> (11) primary key not null auto_increment,name varchar(20) not null);
-Query OK, 0 rows affected (0.67 sec)
+mysql> create table movie(name varchar(20) not null,year int not null,director varchar(20) not null,gaofen int not null);
+Query OK, 0 rows affected (0.50 sec)
 
-mysql> desc taobao;
-ERROR 1146 (42S02): Table 'taobao.taobao' doesn't exist
-mysql> desc shoucangbiaodan;
-+-------+-------------+------+-----+---------+----------------+
-| Field | Type        | Null | Key | Default | Extra          |
-+-------+-------------+------+-----+---------+----------------+
-| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
-| name  | varchar(20) | NO   |     | NULL    |                |
-+-------+-------------+------+-----+---------+----------------+
-2 rows in set (0.05 sec)
+mysql> desc movie;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| name     | varchar(20) | NO   |     | NULL    |       |
+| year     | int(11)     | NO   |     | NULL    |       |
+| director | varchar(20) | NO   |     | NULL    |       |
+| gaofen   | int(11)     | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
 
-mysql> alter table shoucangbiaodan add shoucang varchar(2£© not null;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2£© not null' at line 1
-mysql> alter table shoucangbiaodan add sc varchar(2£© not null;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2£© not null' at line 1
-mysql> alter table shoucangbiaodan add sc varchar(2£©not null;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2£©not null' at line 1
-mysql> insert into shoucangbiaodan(id,name) values(1,"zh"),(2,"fc");
-Query OK, 2 rows affected (0.15 sec)
+mysql> insert into movie(name,year,director,gaofen) values("xihongshishoufu",2017,"yp",8.4),("wukongzhuan",2017,"gzj",7.4);
+Query OK, 2 rows affected (0.12 sec)
 Records: 2  Duplicates: 0  Warnings: 0
 
-mysql> select * from shoucangbiaodan;
-+----+------+
-| id | name |
-+----+------+
-|  1 | zh   |
-|  2 | fc   |
-+----+------+
+mysql> select * from movie;
++-----------------+------+----------+--------+
+| name            | year | director | gaofen |
++-----------------+------+----------+--------+
+| xihongshishoufu | 2017 | yp       |      8 |
+| wukongzhuan     | 2017 | gzj      |      7 |
++-----------------+------+----------+--------+
+2 rows in set (0.00 sec)
+mysql> select name from movie where name like "%xihong%";
++-----------------+
+| name            |
++-----------------+
+| xihongshishoufu |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select name from movie where director like "%g%";
++-------------+
+| name        |
++-------------+
+| wukongzhuan |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select name from movie where year like "%2017%";
++-----------------+
+| name            |
++-----------------+
+| xihongshishoufu |
+| wukongzhuan     |
++-----------------+
 2 rows in set (0.00 sec)
 
-mysql> alter table shoucangbiaodan add sc vaichar(2) not null;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'vaichar(2) not null' at line 1
-mysql> alter table shoucangbiaodan add sc varchar(2) not null;
-Query OK, 0 rows affected (0.36 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> select*from shoucangbiaodian;
-ERROR 1146 (42S02): Table 'taobao.shoucangbiaodian' doesn't exist
-mysql> select * from shoucangbiaodian;
-ERROR 1146 (42S02): Table 'taobao.shoucangbiaodian' doesn't exist
-mysql> select * from shoucangbiaodan;
-+----+------+----+
-| id | name | sc |
-+----+------+----+
-|  1 | zh   |    |
-|  2 | fc   |    |
-+----+------+----+
-2 rows in set (0.00 sec)
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| dianying           |
-| fandaoai           |
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-| taobao             |
-| taobao1            |
-| taobao2            |
-| zhabgwenjing1      |
-+--------------------+
-10 rows in set (0.00 sec)
-
-mysql> use taobao;
-Database changed
-mysql> create table shoucangbiaodan(id int
-    -> (11) primary key not null auto_increment,name varchar(20) not null);
-Query OK, 0 rows affected (0.67 sec)
-
-mysql> desc taobao;
-ERROR 1146 (42S02): Table 'taobao.taobao' doesn't exist
-mysql> desc shoucangbiaodan;
-+-------+-------------+------+-----+---------+----------------+
-| Field | Type        | Null | Key | Default | Extra          |
-+-------+-------------+------+-----+---------+----------------+
-| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
-| name  | varchar(20) | NO   |     | NULL    |                |
-+-------+-------------+------+-----+---------+----------------+
-2 rows in set (0.05 sec)
-
-mysql> alter table shoucangbiaodan add shoucang varchar(2£© not null;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2£© not null' at line 1
-mysql> alter table shoucangbiaodan add sc varchar(2£© not null;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2£© not null' at line 1
-mysql> alter table shoucangbiaodan add sc varchar(2£©not null;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2£©not null' at line 1
-mysql> insert into shoucangbiaodan(id,name) values(1,"zh"),(2,"fc");
-Query OK, 2 rows affected (0.15 sec)
-Records: 2  Duplicates: 0  Warnings: 0
-
-mysql> select * from shoucangbiaodan;
-+----+------+
-| id | name |
-+----+------+
-|  1 | zh   |
-|  2 | fc   |
-+----+------+
-2 rows in set (0.00 sec)
-
-mysql> alter table shoucangbiaodan add sc vaichar(2) not null;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'vaichar(2) not null' at line 1
-mysql> alter table shoucangbiaodan add sc varchar(2) not null;
-Query OK, 0 rows affected (0.36 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> select*from shoucangbiaodian;
-ERROR 1146 (42S02): Table 'taobao.shoucangbiaodian' doesn't exist
-mysql> select * from shoucangbiaodian;
-ERROR 1146 (42S02): Table 'taobao.shoucangbiaodian' doesn't exist
-mysql> select * from shoucangbiaodan;
-+----+------+----+
-| id | name | sc |
-+----+------+----+
-|  1 | zh   |    |
-|  2 | fc   |    |
-+----+------+----+
-2 rows in set (0.00 sec)
-mysql> alter table shoucangbiaodan drop sc;
-Query OK, 0 rows affected (1.82 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> select * from shoucangbiaodan;
-+----+------+
-| id | name |
-+----+------+
-|  1 | zh   |
-|  2 | fc   |
-+----+------+
-2 rows in set (0.00 sec)
+mysql> select max(gaofen) from movie;
++-------------+
+| max(gaofen) |
++-------------+
+|           8 |
++-------------+
+1 row in set (0.00 sec)
